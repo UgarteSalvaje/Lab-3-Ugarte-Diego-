@@ -29,6 +29,64 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+class Detalles extends StatelessWidget {
+  const Detalles({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Detalles'),
+      ),
+      body: Center(
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+        const Text('No hay nada que decir :)'),
+        ElevatedButton( onPressed: () { Navigator.pop(context); }, child: const Text('Volver al inicio'),)
+          ,],
+        ),
+      ),
+    );
+  }
+}
+
+class Lista extends StatelessWidget {
+  const Lista({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const title = 'Lista';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: Center( child: ListView(
+          children: <Widget>[
+            ElevatedButton(onPressed: () => {Navigator.pop(context)}, child: const Text('Volver')),
+            const ListTile(
+              leading: Icon(Icons.map),
+              title: Text('Mapa supongo'),
+            ),
+            const ListTile(
+              leading: Icon(Icons.photo_album),
+              title: Text('Album supongo'),
+            ),
+            const ListTile(
+              leading: Icon(Icons.phone),
+              title: Text('Telefono supongo'),
+            ),
+          ]
+        ),
+        ),
+      ),
+    );
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String icono = 'assets/icons/Question.svg';
@@ -76,7 +134,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      persistentFooterButtons: [],
+      persistentFooterButtons: [ElevatedButton(child: const Text('Ir a detalles'), onPressed: () 
+      {Navigator.push(context, MaterialPageRoute(builder: (context) => const Detalles()),);},), 
+      ElevatedButton(child: const Text('Ir a Lista'), onPressed: () 
+      {Navigator.push(context, MaterialPageRoute(builder: (context) => const Lista()),);},)],
       appBar: AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: Text(widget.title),
