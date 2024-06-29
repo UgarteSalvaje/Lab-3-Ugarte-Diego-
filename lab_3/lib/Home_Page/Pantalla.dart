@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lab_3/main.dart';
 
 // This widget is the root of your application.
 class Pantalla extends StatelessWidget{
@@ -13,7 +14,7 @@ class Pantalla extends StatelessWidget{
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ), 
-      home: const MyHomePage(title: 'Lab 5 Diego Ugarte'),
+      home: const MyHomePage(title: 'Lab 7 Diego Ugarte'),
     );
   }
 }
@@ -26,7 +27,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() {
+    print('create state');
+    return _MyHomePageState();
+  } 
 }
 
 class Detalles extends StatelessWidget {
@@ -92,6 +96,54 @@ class _MyHomePageState extends State<MyHomePage> {
   String icono = 'assets/icons/Question.svg';
   String text =' ';
 
+  _MyHomePageState() {
+    print('_MyHomePageState constructor: Objeto esta siendo creado');
+  }
+
+   void initState() {
+    super.initState();
+    print('initState: Inicializando estado');
+    print('initState: mounted = $mounted');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print('didChangeDependencies: Dependencias cambiadas');
+  }
+
+  @override
+  void didUpdateWidget(covariant MyHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('didUpdateWidget: Widget actualizado');
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    print('setState: Estado ha sido restablecido');
+  }
+
+  @override
+  void deactivate() {
+    print('deactivate: Widget esta siendo removido del arbol');
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('dispose: eliminando esta');
+    print('dispose: mounted = $mounted');
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    print('reassemble: La aplicación se está volviendo a ensamblar');
+    print('reassemble: mounted = $mounted');
+  }
+
   void _situation(){
 
     if(_counter==10){     
@@ -132,10 +184,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    print('build() called');
+
     return Scaffold(
-      persistentFooterButtons: [ElevatedButton(child: const Text('Ir a detalles'), onPressed: () 
-      {Navigator.push(context, MaterialPageRoute(builder: (context) => const Detalles()),);},), 
+      persistentFooterButtons: [
+      ElevatedButton(child: const Text('Ir a Detalles'), onPressed: () 
+      {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Detalles()),);},),
       ElevatedButton(child: const Text('Ir a Lista'), onPressed: () 
       {Navigator.push(context, MaterialPageRoute(builder: (context) => const Lista()),);},)],
       appBar: AppBar(
